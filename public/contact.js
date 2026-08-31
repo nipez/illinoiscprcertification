@@ -28,7 +28,7 @@ if (form) {
     }
 
     if (!response.ok) {
-      status.textContent = "We could not save that request. Please email illinoiscpr@protonmail.com.";
+      status.textContent = "We could not save that request. Please email contact@illinoiscprcertification.com.";
       status.hidden = false;
       return;
     }
