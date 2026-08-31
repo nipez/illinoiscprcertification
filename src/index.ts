@@ -1,6 +1,5 @@
 export default {
   async fetch(request, env, ctx): Promise<Response> {
-    void ctx;
     const url = new URL(request.url);
 
     if (url.pathname === "/admin" || url.pathname === "/admin/") {
@@ -9,7 +8,7 @@ export default {
 
     try {
       if (url.pathname === "/api/quotes" && request.method === "POST") {
-        return await createQuote(request, env);
+        return await createQuote(request, env, ctx);
       }
       if (url.pathname === "/api/admin/login" && request.method === "POST") {
         return await adminLogin(request, env);
@@ -45,7 +44,14 @@ type QuoteInput = {
   notes: string;
 };
 
-async function createQuote(request: Request, env: Env): Promise<Response> {
+const QUOTE_INBOX = "contact@illinoiscprcertification.com";
+const QUOTE_FROM = "quotes@illinoiscprcertification.com";
+
+async function createQuote(
+  request: Request,
+  env: Env,
+  ctx: ExecutionContext,
+): Promise<Response> {
   const payload = await readJson(request);
   if (!payload) {
     return json({ error: "Request is too large or not JSON." }, 400);
@@ -74,7 +80,39 @@ async function createQuote(request: Request, env: Env): Promise<Response> {
     )
     .run();
 
+  ctx.waitUntil(notifyQuoteInbox(env, quote));
   return json({ ok: true });
+}
+
+async function notifyQuoteInbox(env: Env, quote: QuoteInput): Promise<void> {
+  const lines = [
+    "New class quote request",
+    "",
+    `Name: ${quote.name}`,
+    `Email: ${quote.email}`,
+    `Phone: ${quote.phone || "—"}`,
+    `Practice: ${quote.practice || "—"}`,
+    `Practice type: ${quote.practice_type || "—"}`,
+    `Students: ${quote.students || "—"}`,
+    `Zip: ${quote.zip || "—"}`,
+    `Timeframe: ${quote.timeframe || "—"}`,
+    `Notes: ${quote.notes || "—"}`,
+    "",
+    "Inbox: https://illinoiscprcertification.com/admin",
+  ];
+
+  try {
+    const result = await env.EMAIL.send({
+      from: { name: "Illinois CPR Certification", email: QUOTE_FROM },
+      to: QUOTE_INBOX,
+      replyTo: { name: quote.name, email: quote.email },
+      subject: `Quote request from ${quote.name}`,
+      text: lines.join("\n"),
+    });
+    console.log(JSON.stringify({ event: "quote_email_sent", messageId: result.messageId }));
+  } catch (error) {
+    console.error(JSON.stringify({ event: "quote_email_failed", error: String(error) }));
+  }
 }
 
 async function adminLogin(request: Request, env: Env): Promise<Response> {
