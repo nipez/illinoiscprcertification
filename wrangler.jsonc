@@ -1,15 +1,28 @@
 {
   "name": "illinois-cpr-certification",
   "account_id": "0b1ef01f2010c742c857a93eb039bd43",
+  "main": "src/index.ts",
   "compatibility_date": "2026-08-31",
+  "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
   "preview_urls": true,
   "assets": {
-    "directory": "./public"
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*", "/admin", "/admin/"]
   },
   "observability": {
-    "enabled": true
+    "enabled": true,
+    "head_sampling_rate": 1
   },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "illinois-cpr-quotes",
+      "database_id": "2ea829dd-a2f3-4b02-9d1e-54a22e05de3d",
+      "migrations_dir": "migrations"
+    }
+  ],
   "routes": [
     {
       "pattern": "illinoiscprcertification.com",

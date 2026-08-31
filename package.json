@@ -6,6 +6,8 @@
     "deploy": "wrangler deploy"
   },
   "devDependencies": {
+    "@types/node": "^26.4.0",
+    "typescript": "^7.0.2",
     "wrangler": "^4.34.0"
   }
 }
