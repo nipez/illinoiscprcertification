@@ -26,20 +26,24 @@ body {
 .page {
   min-height: 100vh;
   display: grid;
-  grid-template-columns: minmax(20rem, 28rem) 1fr;
+  grid-template-columns: minmax(22rem, 36rem) 1fr;
 }
 
-.card {
+.copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  max-height: 100vh;
+  overflow: auto;
   background: var(--cream);
-  padding: clamp(1.5rem, 3vw, 2.4rem);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
 }
 
 .hero {
   margin: 0;
-  min-height: 100vh;
+  position: sticky;
+  top: 0;
+  height: 100vh;
   background: #1a140e;
 }
 
@@ -52,63 +56,72 @@ body {
 }
 
 .eyebrow {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.7rem;
   font-size: 0.75rem;
-  letter-spacing: 0.22em;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink-soft);
 }
 
-h1 {
-  margin: 0;
+h1,
+h2 {
   font-family: "Instrument Serif", Georgia, "Times New Roman", serif;
   font-weight: 400;
-  font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-  line-height: 0.95;
   letter-spacing: -0.02em;
 }
 
-h1 span {
-  display: block;
+h1 {
+  margin: 0 0 1rem;
+  font-size: clamp(2rem, 3.8vw, 3rem);
+  line-height: 1.05;
 }
 
-.rule {
-  width: 4rem;
-  height: 2px;
-  margin: 1rem 0 0.95rem;
-  background: var(--line);
-  border: 0;
+h2 {
+  margin: 1.5rem 0 0.7rem;
+  font-size: 1.45rem;
+  line-height: 1.2;
 }
 
-.lede {
+.promises {
   margin: 0 0 1.15rem;
-  font-size: 1.05rem;
-  line-height: 1.45;
-}
-
-.points {
-  margin: 0 0 1.35rem;
   padding: 0;
   list-style: none;
   display: grid;
   gap: 0.35rem;
+  font-size: 1.05rem;
+  line-height: 1.45;
+}
+
+.features {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.45rem;
+}
+
+.features li {
+  padding: 0.55rem 0.7rem;
+  border-left: 3px solid var(--red);
+  background: rgba(20, 28, 36, 0.05);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.copy p {
+  margin: 0 0 0.85rem;
+  line-height: 1.5;
   color: var(--ink-soft);
 }
 
-.points li {
-  padding-left: 1rem;
-  position: relative;
+.copy strong {
+  color: var(--ink);
+  font-weight: 600;
 }
 
-.points li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.62em;
-  width: 0.4rem;
-  height: 0.4rem;
-  border-radius: 50%;
-  background: var(--red);
+.actions {
+  margin-top: 0.4rem;
 }
 
 .phone {
@@ -119,14 +132,23 @@ h1 span {
   background: var(--ink);
   color: var(--cream);
   text-decoration: none;
-  font-size: 1.08rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
 }
 
 .phone:hover,
 .phone:focus-visible {
   background: var(--red);
+}
+
+.call {
+  margin: 0.85rem 0 0;
+  font-size: 1rem;
+}
+
+.call a {
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .meta {
@@ -139,20 +161,24 @@ h1 span {
 }
 
 .badge {
-  width: 5.75rem;
+  width: 5.5rem;
   height: auto;
   background: #fff;
   border-radius: 50%;
 }
 
 .coming {
-  margin: 0;
+  margin: 0 0 0.25rem;
   font-size: 0.92rem;
-  color: var(--ink-soft);
+}
+
+.contact {
+  color: var(--ink);
+  font-weight: 600;
 }
 
 .disclaimer {
-  margin: 1.15rem 0 0;
+  margin: 1.1rem 0 0;
   font-size: 0.7rem;
   line-height: 1.4;
   color: #5d6670;
@@ -161,15 +187,16 @@ h1 span {
 @media (max-width: 860px) {
   .page {
     grid-template-columns: 1fr;
-    grid-template-rows: minmax(42vh, 48vh) auto;
   }
 
   .hero {
-    min-height: 0;
-    order: -1;
+    position: relative;
+    height: 42vh;
+    min-height: 16rem;
   }
 
-  .card {
-    padding: 1.4rem 1.2rem 1.35rem;
+  .copy {
+    max-height: none;
+    padding: 1.4rem 1.2rem 1.5rem;
   }
 }
