@@ -1,0 +1,22 @@
+{
+  "name": "illinois-cpr-certification",
+  "compatibility_date": "2026-08-31",
+  "workers_dev": true,
+  "preview_urls": true,
+  "assets": {
+    "directory": "./public"
+  },
+  "observability": {
+    "enabled": true
+  },
+  "routes": [
+    {
+      "pattern": "illinoiscprcertification.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.illinoiscprcertification.com",
+      "custom_domain": true
+    }
+  ]
+}
