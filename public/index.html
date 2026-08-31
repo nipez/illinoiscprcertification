@@ -26,7 +26,20 @@
   <body>
     <main class="page">
       <section class="copy" aria-label="Illinois CPR Certification">
-        <p class="eyebrow">Illinois CPR Certification</p>
+        <header class="brand">
+          <img
+            class="badge"
+            src="/images/aha-aligned-instructor.png"
+            width="104"
+            height="104"
+            alt="American Heart Association Aligned Instructor"
+          />
+          <div>
+            <p class="eyebrow">Illinois · On-site training</p>
+            <p class="brand-name">Illinois CPR Certification</p>
+          </div>
+        </header>
+
         <h1>Mobile AHA BLS Training Built for Busy Healthcare Teams</h1>
         <ul class="promises">
           <li>No lost production.</li>
@@ -56,26 +69,92 @@
         </p>
 
         <div class="actions">
-          <a class="phone" href="tel:+18473217610">Get your quote today</a>
+          <a
+            class="phone"
+            href="mailto:illinoiscpr@protonmail.com?subject=BLS%20class%20quote%20request"
+            >Get your quote today</a
+          >
           <p class="call">
             Call us today
             <a href="tel:+18473217610">(847) 321-7610</a>
           </p>
+          <p class="call">
+            Email
+            <a href="mailto:illinoiscpr@protonmail.com">illinoiscpr@protonmail.com</a>
+          </p>
         </div>
 
-        <div class="meta">
-          <div>
-            <p class="coming">Full website coming soon.</p>
-            <a class="contact" href="tel:+18473217610">Contact us</a>
-          </div>
-          <img
-            class="badge"
-            src="/images/aha-aligned-instructor.png"
-            width="104"
-            height="104"
-            alt="American Heart Association Aligned Instructor"
-          />
-        </div>
+        <form id="quote" class="quote" method="get" action="mailto:illinoiscpr@protonmail.com">
+          <h2>Request a class quote</h2>
+          <p class="form-intro">
+            Tell us about your office and we will follow up by email.
+          </p>
+
+          <fieldset>
+            <legend>Contact</legend>
+            <label>
+              Full name
+              <input name="name" type="text" autocomplete="name" required />
+            </label>
+            <label>
+              Email address
+              <input name="email" type="email" autocomplete="email" required />
+            </label>
+            <label>
+              Direct phone
+              <input name="phone" type="tel" autocomplete="tel" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Practice</legend>
+            <label>
+              Practice / company name
+              <input name="practice" type="text" />
+            </label>
+            <label>
+              Practice type
+              <select name="practice_type">
+                <option value="">Select one</option>
+                <option>Dental Office</option>
+                <option>Medical Clinic</option>
+                <option>Physical Therapy</option>
+                <option>Urgent Care</option>
+                <option>Hospital or Network</option>
+                <option>Other Corporate Office</option>
+              </select>
+            </label>
+            <div class="split">
+              <label>
+                Estimated students
+                <input name="students" type="number" min="1" />
+              </label>
+              <label>
+                Zip code
+                <input name="zip" type="text" inputmode="numeric" autocomplete="postal-code" />
+              </label>
+            </div>
+            <label>
+              Ideal timeframe
+              <select name="timeframe">
+                <option value="">Select one</option>
+                <option>ASAP (Within 30 days)</option>
+                <option>Next Month</option>
+                <option>2–3 Months Out</option>
+                <option>Just looking for information</option>
+              </select>
+            </label>
+          </fieldset>
+
+          <label>
+            Notes
+            <textarea name="notes" rows="3" placeholder="Split shifts, OSHA bundle, or other schedule notes"></textarea>
+          </label>
+
+          <button type="submit">Send quote request</button>
+        </form>
+
+        <p class="coming">Full website coming soon.</p>
         <p class="disclaimer">
           American Heart Association® is a registered trademark of the American
           Heart Association. Illinois CPR Certification is an independent
@@ -89,5 +168,6 @@
         />
       </figure>
     </main>
+    <script src="/contact.js" defer></script>
   </body>
 </html>
