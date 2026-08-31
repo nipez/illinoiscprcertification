@@ -254,6 +254,7 @@ button[type="submit"]:focus-visible {
 
   .hero {
     position: relative;
+    order: -1;
     height: 42vh;
     min-height: 16rem;
   }
