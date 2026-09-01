@@ -18,7 +18,10 @@
   "send_email": [
     {
       "name": "EMAIL",
-      "destination_address": "contact@illinoiscprcertification.com"
+      "allowed_destination_addresses": [
+        "contact@illinoiscprcertification.com",
+        "jason@illinoiscprcertification.com"
+      ]
     }
   ],
   "d1_databases": [

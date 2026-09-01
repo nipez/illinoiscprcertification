@@ -44,7 +44,10 @@ type QuoteInput = {
   notes: string;
 };
 
-const QUOTE_INBOX = "contact@illinoiscprcertification.com";
+const QUOTE_INBOXES = [
+  "contact@illinoiscprcertification.com",
+  "jason@illinoiscprcertification.com",
+];
 const QUOTE_FROM = "quotes@illinoiscprcertification.com";
 
 async function createQuote(
@@ -101,18 +104,29 @@ async function notifyQuoteInbox(env: Env, quote: QuoteInput): Promise<void> {
     "Inbox: https://illinoiscprcertification.com/admin",
   ];
 
-  try {
-    const result = await env.EMAIL.send({
-      from: { name: "Illinois CPR Certification", email: QUOTE_FROM },
-      to: QUOTE_INBOX,
-      replyTo: { name: quote.name, email: quote.email },
-      subject: `Quote request from ${quote.name}`,
-      text: lines.join("\n"),
-    });
-    console.log(JSON.stringify({ event: "quote_email_sent", messageId: result.messageId }));
-  } catch (error) {
-    console.error(JSON.stringify({ event: "quote_email_failed", error: String(error) }));
-  }
+  const text = lines.join("\n");
+  const subject = `Quote request from ${quote.name}`;
+
+  await Promise.all(
+    QUOTE_INBOXES.map(async (to) => {
+      try {
+        const result = await env.EMAIL.send({
+          from: { name: "Illinois CPR Certification", email: QUOTE_FROM },
+          to,
+          replyTo: { name: quote.name, email: quote.email },
+          subject,
+          text,
+        });
+        console.log(
+          JSON.stringify({ event: "quote_email_sent", to, messageId: result.messageId }),
+        );
+      } catch (error) {
+        console.error(
+          JSON.stringify({ event: "quote_email_failed", to, error: String(error) }),
+        );
+      }
+    }),
+  );
 }
 
 async function adminLogin(request: Request, env: Env): Promise<Response> {
