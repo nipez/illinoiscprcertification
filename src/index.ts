@@ -1,32 +1,75 @@
 export default {
   async fetch(request, env, ctx): Promise<Response> {
     const url = new URL(request.url);
+    const host = url.hostname.toLowerCase();
+
+    // Canonical host: apex only (www → apex)
+    if (host === "www.illinoiscprcertification.com") {
+      const target = new URL(request.url);
+      target.hostname = "illinoiscprcertification.com";
+      target.protocol = "https:";
+      return Response.redirect(target.toString(), 301);
+    }
+
+    // Prefer HTTPS on the production apex (Workers already terminate TLS;
+    // this covers any plain-http edge case via X-Forwarded-Proto).
+    const forwardedProto = request.headers.get("x-forwarded-proto");
+    if (
+      host === "illinoiscprcertification.com" &&
+      (url.protocol === "http:" || forwardedProto === "http")
+    ) {
+      const target = new URL(request.url);
+      target.protocol = "https:";
+      target.hostname = "illinoiscprcertification.com";
+      return Response.redirect(target.toString(), 301);
+    }
 
     if (url.pathname === "/admin" || url.pathname === "/admin/") {
-      return env.ASSETS.fetch(new URL("/admin.html", request.url));
+      return withPreviewHeaders(
+        request,
+        await env.ASSETS.fetch(new URL("/admin.html", request.url)),
+      );
     }
 
     try {
       if (url.pathname === "/api/quotes" && request.method === "POST") {
-        return await createQuote(request, env, ctx);
+        return withPreviewHeaders(request, await createQuote(request, env, ctx));
       }
       if (url.pathname === "/api/admin/login" && request.method === "POST") {
-        return await adminLogin(request, env);
+        return withPreviewHeaders(request, await adminLogin(request, env));
       }
       if (url.pathname === "/api/admin/logout" && request.method === "POST") {
-        return adminLogout();
+        return withPreviewHeaders(request, adminLogout());
       }
       if (url.pathname === "/api/admin/quotes" && request.method === "GET") {
-        return await listQuotes(request, env);
+        return withPreviewHeaders(request, await listQuotes(request, env));
       }
     } catch (error) {
       console.error(JSON.stringify({ event: "worker_error", error: String(error) }));
-      return json({ error: "Something went wrong." }, 500);
+      return withPreviewHeaders(request, json({ error: "Something went wrong." }, 500));
     }
 
-    return env.ASSETS.fetch(request);
+    return withPreviewHeaders(request, await env.ASSETS.fetch(request));
   },
 } satisfies ExportedHandler<Env>;
+
+function isWorkersDevHost(host: string): boolean {
+  return host.endsWith(".workers.dev");
+}
+
+function withPreviewHeaders(request: Request, response: Response): Response {
+  const host = new URL(request.url).hostname.toLowerCase();
+  if (!isWorkersDevHost(host)) {
+    return response;
+  }
+  const headers = new Headers(response.headers);
+  headers.set("X-Robots-Tag", "noindex");
+  return new Response(response.body, {
+    status: response.status,
+    statusText: response.statusText,
+    headers,
+  });
+}
 
 const MAX_BODY = 16_000;
 const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7;

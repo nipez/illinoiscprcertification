@@ -28,7 +28,8 @@ if (form) {
     }
 
     if (!response.ok) {
-      status.textContent = "We could not save that request. Please email contact@illinoiscprcertification.com.";
+      status.textContent =
+        "We could not save that request. Please email contact@illinoiscprcertification.com.";
       status.hidden = false;
       return;
     }
@@ -36,5 +37,14 @@ if (form) {
     form.reset();
     status.textContent = "Thanks — your quote request is in. We will follow up shortly.";
     status.hidden = false;
+  });
+}
+
+const navToggle = document.querySelector(".nav-toggle");
+const siteNav = document.getElementById("site-nav");
+if (navToggle && siteNav) {
+  navToggle.addEventListener("click", () => {
+    const open = siteNav.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", open ? "true" : "false");
   });
 }
