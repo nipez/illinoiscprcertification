@@ -1,27 +1,23 @@
 export default {
   async fetch(request, env, ctx): Promise<Response> {
     const url = new URL(request.url);
-    const host = url.hostname.toLowerCase();
+    const hostHeader = (request.headers.get("host") || url.hostname)
+      .toLowerCase()
+      .split(":")[0];
+    const forwardedProto = (request.headers.get("x-forwarded-proto") || "").toLowerCase();
 
-    // Canonical host: apex only (www → apex)
-    if (host === "www.illinoiscprcertification.com") {
-      const target = new URL(request.url);
-      target.hostname = "illinoiscprcertification.com";
-      target.protocol = "https:";
-      return Response.redirect(target.toString(), 301);
+    // Canonical host: apex only (www → apex). Use Host header so local wrangler
+    // custom-domain remapping does not hide www vs apex.
+    if (hostHeader === "www.illinoiscprcertification.com") {
+      const dest = `https://illinoiscprcertification.com${url.pathname}${url.search}`;
+      return new Response(null, { status: 301, headers: { Location: dest } });
     }
 
-    // Prefer HTTPS on the production apex (Workers already terminate TLS;
-    // this covers any plain-http edge case via X-Forwarded-Proto).
-    const forwardedProto = request.headers.get("x-forwarded-proto");
-    if (
-      host === "illinoiscprcertification.com" &&
-      (url.protocol === "http:" || forwardedProto === "http")
-    ) {
-      const target = new URL(request.url);
-      target.protocol = "https:";
-      target.hostname = "illinoiscprcertification.com";
-      return Response.redirect(target.toString(), 301);
+    // HTTP → HTTPS on the production apex only. Rely on X-Forwarded-Proto from
+    // the edge so local `wrangler dev` (http://127.0.0.1) is never redirected.
+    if (hostHeader === "illinoiscprcertification.com" && forwardedProto === "http") {
+      const dest = `https://illinoiscprcertification.com${url.pathname}${url.search}`;
+      return new Response(null, { status: 301, headers: { Location: dest } });
     }
 
     if (url.pathname === "/admin" || url.pathname === "/admin/") {
@@ -53,13 +49,15 @@ export default {
   },
 } satisfies ExportedHandler<Env>;
 
-function isWorkersDevHost(host: string): boolean {
+function isWorkersDevHost(request: Request): boolean {
+  const host = (request.headers.get("host") || new URL(request.url).hostname)
+    .toLowerCase()
+    .split(":")[0];
   return host.endsWith(".workers.dev");
 }
 
 function withPreviewHeaders(request: Request, response: Response): Response {
-  const host = new URL(request.url).hostname.toLowerCase();
-  if (!isWorkersDevHost(host)) {
+  if (!isWorkersDevHost(request)) {
     return response;
   }
   const headers = new Headers(response.headers);
