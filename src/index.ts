@@ -74,6 +74,7 @@ const SESSION_TTL_SECONDS = 60 * 60 * 24 * 7;
 const COOKIE = "icc_admin";
 
 type QuoteInput = {
+  request_type: string;
   name: string;
   email: string;
   phone: string;
@@ -108,8 +109,8 @@ async function createQuote(
 
   await env.DB.prepare(
     `INSERT INTO quotes
-      (name, email, phone, practice, practice_type, students, zip, timeframe, notes)
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      (name, email, phone, practice, practice_type, students, zip, timeframe, notes, request_type)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
   )
     .bind(
       quote.name,
@@ -121,6 +122,7 @@ async function createQuote(
       quote.zip,
       quote.timeframe,
       quote.notes,
+      quote.request_type,
     )
     .run();
 
@@ -129,9 +131,12 @@ async function createQuote(
 }
 
 async function notifyQuoteInbox(env: Env, quote: QuoteInput): Promise<void> {
+  const requestLabel =
+    quote.request_type === "individual" ? "Individual / small class" : "Onsite group at my office";
   const lines = [
     "New class quote request",
     "",
+    `Request type: ${requestLabel}`,
     `Name: ${quote.name}`,
     `Email: ${quote.email}`,
     `Phone: ${quote.phone || "—"}`,
@@ -209,7 +214,7 @@ async function listQuotes(request: Request, env: Env): Promise<Response> {
   }
 
   const result = await env.DB.prepare(
-    `SELECT id, created_at, name, email, phone, practice, practice_type, students, zip, timeframe, notes
+    `SELECT id, created_at, request_type, name, email, phone, practice, practice_type, students, zip, timeframe, notes
      FROM quotes
      ORDER BY id DESC
      LIMIT 200`,
@@ -241,7 +246,10 @@ async function readJson(request: Request): Promise<Record<string, unknown> | nul
 }
 
 function normalizeQuote(payload: Record<string, unknown>): QuoteInput {
+  const rawType = asString(payload.request_type).toLowerCase();
+  const request_type = rawType === "individual" ? "individual" : "onsite";
   return {
+    request_type,
     name: clip(asString(payload.name), 120),
     email: clip(asString(payload.email), 160),
     phone: clip(asString(payload.phone), 40),

@@ -36,9 +36,16 @@ function showInbox(quotes) {
   for (const quote of quotes) {
     const card = document.createElement("article");
     card.className = "card-row";
+    const requestType =
+      quote.request_type === "individual"
+        ? "Individual / small class"
+        : quote.request_type === "onsite"
+          ? "Onsite group at my office"
+          : "Request type not listed";
     card.innerHTML = `
       <p class="meta-line">${escapeHtml(quote.created_at || "")} · #${escapeHtml(String(quote.id || ""))}</p>
       <h2>${escapeHtml(quote.name || "")}</h2>
+      <p><strong>${escapeHtml(requestType)}</strong></p>
       <p>${escapeHtml(quote.email || "")}${quote.phone ? ` · ${escapeHtml(quote.phone)}` : ""}</p>
       <p>${escapeHtml(quote.practice || "Practice not listed")}${quote.practice_type ? ` · ${escapeHtml(quote.practice_type)}` : ""}</p>
       <p>${quote.students ? `${escapeHtml(quote.students)} students` : "Student count not listed"}${quote.zip ? ` · ${escapeHtml(quote.zip)}` : ""}</p>

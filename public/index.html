@@ -82,18 +82,16 @@
             alt="Illinois CPR Certification"
           />
         </a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
-          Menu
-        </button>
+        <input class="nav-toggle-input" type="checkbox" id="nav-toggle" />
+        <label class="nav-toggle" for="nav-toggle" aria-controls="site-nav" aria-expanded="false">Menu</label>
         <nav class="site-nav" id="site-nav" aria-label="Primary">
-        <a href="/" aria-current="page">Home</a>
-        <a href="/bls-certification/">BLS Course</a>
-        <a href="/onsite-group-training/">Onsite Training</a>
-        <a href="/service-areas/">Service Areas</a>
-        <a href="/about/">About</a>
-        <a href="/faq/">FAQ</a>
-        <a href="/contact/">Contact</a>
-        <a class="nav-cta" href="/contact/#quote">Request a quote</a>
+          <a href="/bls-certification/">BLS Course</a>
+          <a href="/onsite-group-training/">Onsite Training</a>
+          <a href="/service-areas/">Service Areas</a>
+          <a href="/about/">About</a>
+          <a href="/faq/">FAQ</a>
+          <a href="/contact/">Contact</a>
+          <a class="nav-cta" href="/contact/#quote">Request a quote</a>
         </nav>
       </div>
     </header>
@@ -141,13 +139,6 @@
             <a class="btn" href="#quote">Get your quote today</a>
             <a class="btn btn-secondary" href="/bls-certification/">AHA BLS course details</a>
           </div>
-          <p class="call-line">
-            Call us today <a href="tel:+18473217610">(847) 321-7610</a>
-          </p>
-          <p class="call-line">
-            Email
-            <a href="mailto:contact@illinoiscprcertification.com">contact@illinoiscprcertification.com</a>
-          </p>
         </div>
         <figure class="home-hero-visual">
           <img
@@ -248,26 +239,19 @@
         </div>
       </section>
 
-      <section class="section section-muted" id="quote">
-        <div class="container contact-layout">
-          <div>
-            <h2>Request a quote for onsite BLS</h2>
-            <p class="lede">
-              Tell us your practice type, student count, and timeframe. We’ll follow up
-              with options for mobile AHA BLS training at your location.
-            </p>
-            <p class="call-line">Phone <a href="tel:+18473217610">(847) 321-7610</a></p>
-            <p class="call-line">
-              Email
-              <a href="mailto:contact@illinoiscprcertification.com">contact@illinoiscprcertification.com</a>
-            </p>
-          </div>
+      <section class="section section-muted quote-section" id="quote">
+        <div class="container">
           <form id="quote" class="quote">
-            <h2>Request a class quote</h2>
+            <h2>Request a quote</h2>
             <p class="form-intro">
-              Tell us about your team and we will follow up with a class quote for onsite
-              AHA BLS training.
+              Tell us what you need and we will follow up with pricing and scheduling options.
             </p>
+            <div class="request-type" role="radiogroup" aria-label="Quote type">
+              <input type="radio" name="request_type" id="request-type-onsite" value="onsite" checked />
+              <label for="request-type-onsite">Onsite group at my office</label>
+              <input type="radio" name="request_type" id="request-type-individual" value="individual" />
+              <label for="request-type-individual">Individual / small class</label>
+            </div>
             <fieldset>
               <legend>Contact</legend>
               <label>
@@ -283,8 +267,8 @@
                 <input name="phone" type="tel" autocomplete="tel" />
               </label>
             </fieldset>
-            <fieldset>
-              <legend>Practice</legend>
+            <fieldset class="fields-onsite">
+              <legend>Practice / group</legend>
               <label>
                 Practice / company name
                 <input name="practice" type="text" />
@@ -301,18 +285,21 @@
                   <option>Other Corporate Office</option>
                 </select>
               </label>
-              <div class="split">
-                <label>
-                  Estimated students
-                  <input name="students" type="number" min="1" />
-                </label>
-                <label>
-                  Zip code
-                  <input name="zip" type="text" inputmode="numeric" autocomplete="postal-code" />
-                </label>
-              </div>
               <label>
-                Ideal timeframe
+                Zip code
+                <input name="zip" type="text" inputmode="numeric" autocomplete="postal-code" />
+              </label>
+            </fieldset>
+            <fieldset>
+              <legend>Class details</legend>
+              <label>
+                <span class="label-people-onsite">Estimated students</span>
+                <span class="label-people-individual">Number of people</span>
+                <input name="students" type="number" min="1" />
+              </label>
+              <label>
+                <span class="label-people-onsite">Ideal timeframe</span>
+                <span class="label-people-individual">Preferred timeframe</span>
                 <select name="timeframe">
                   <option value="">Select one</option>
                   <option>ASAP (Within 30 days)</option>
@@ -328,6 +315,12 @@
             </label>
             <button type="submit">Send quote request</button>
             <p id="quote-status" class="form-status" hidden></p>
+            <p class="prefer-talk">
+              Prefer to talk? Call
+              <a href="tel:+18473217610">(847) 321-7610</a>
+              or email
+              <a href="mailto:contact@illinoiscprcertification.com">contact@illinoiscprcertification.com</a>
+            </p>
           </form>
         </div>
       </section>
