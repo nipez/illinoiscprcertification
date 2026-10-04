@@ -1,4 +1,4 @@
-const form = document.getElementById("quote");
+const form = document.getElementById("quote-form");
 const status = document.getElementById("quote-status");
 
 if (form) {
