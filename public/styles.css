@@ -277,7 +277,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem 1.25rem 2.25rem 1.25rem;
+  padding: 1.25rem 1.25rem 2rem 1.25rem;
   background:
     linear-gradient(165deg, rgba(255, 253, 248, 0.55), transparent 40%),
     var(--cream);
@@ -300,16 +300,6 @@ p {
   object-position: 58% 42%;
   min-height: 22rem;
   max-height: 34rem;
-}
-
-.brand-mark {
-  margin-bottom: 0.85rem;
-}
-
-.brand-mark img {
-  display: block;
-  width: min(100%, 16.5rem);
-  height: auto;
 }
 
 .highlights {
@@ -1030,7 +1020,7 @@ button[type="submit"]:focus-visible {
   }
 
   .home-hero-copy {
-    padding: 1.35rem 1.2rem 1.75rem;
+    padding: 1rem 1.2rem 1.5rem;
   }
 
   .course-facts {
