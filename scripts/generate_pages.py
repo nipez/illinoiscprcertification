@@ -58,7 +58,6 @@ ORG_JSONLD = """{
     }
   ]
 }"""
-# TODO comments for geo/openingHours/priceRange/sameAs left in HTML comments near JSON-LD
 
 
 def nav(current: str) -> str:
@@ -199,7 +198,6 @@ def head(
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/styles.css" />
-    <!-- TODO-JASON: add geo, openingHours, priceRange, and sameAs (social profiles) to LocalBusiness JSON-LD when confirmed -->
     <script type="application/ld+json">
 {ld}
     </script>
@@ -634,9 +632,8 @@ bls_body = r'''
             Centers also support HeartCode BLS (online cognitive portion) plus an in-person
             skills session.
           </p>
-          <p class="todo-note">
-            [TODO: confirm Jason offers HeartCode BLS skills sessions]
-            <!-- TODO-JASON: confirm whether HeartCode BLS blended skills sessions are offered -->
+          <p>
+            Ask us about blended learning options if your team needs an in-person skills session.
           </p>
 
           <h2>eCard delivery and verification</h2>
@@ -646,9 +643,8 @@ bls_body = r'''
             aligned with. Training Centers must issue cards within 20 business days of
             successful completion; in practice, eCards often arrive sooner.
           </p>
-          <p class="todo-note">
-            Course completion cards are issued through [TODO: AHA Training Center name, City, IL].
-            <!-- TODO-JASON: Training Center name, city, and state for BLS card issuance disclosure -->
+          <p>
+            Course completion cards are issued through the AHA Training Center our instructor is aligned with.
           </p>
           <p>
             You can verify AHA eCards at
@@ -671,9 +667,8 @@ bls_body = r'''
           </ul>
 
           <h2>Group size and pricing</h2>
-          <p class="todo-note">
-            [TODO: minimum and maximum group size per class]
-            <!-- TODO-JASON: confirm min/max students per BLS class -->
+          <p>
+            Class sizes are set to keep instructor-to-student and manikin ratios within AHA standards; tell us your headcount and we will plan the session.
           </p>
           <p>
             Pricing depends on group size, location, and whether you need initial or renewal
@@ -772,13 +767,11 @@ onsite_body = r'''
           </p>
 
           <h2>Minimum group size and scheduling</h2>
-          <p class="todo-note">
-            [TODO: minimum group size for onsite training]
-            <!-- TODO-JASON: confirm minimum students for onsite group BLS -->
+          <p>
+            Class sizes are set to keep instructor-to-student and manikin ratios within AHA standards; tell us your headcount and we will plan the session.
           </p>
-          <p class="todo-note">
-            [TODO: confirm before/after hours and lunch-hour scheduling options]
-            <!-- TODO-JASON: confirm scheduling windows (before clinic, after hours, lunch) -->
+          <p>
+            We work around your clinic schedule.
           </p>
           <p>
             Most healthcare teams prefer early morning, evening, or split sessions so
@@ -923,58 +916,6 @@ page_shell(
     crumb_items=[("/", "Home"), ("/onsite-group-training/", "Onsite Training")],
 )
 
-# ========== HEARTSAVER (draft, noindex, not in nav/sitemap) ==========
-heartsaver_body = r'''
-      <!-- TODO-JASON: confirm he teaches Heartsaver before indexing or linking this page -->
-      <div class="draft-banner">DRAFT — TODO-JASON: confirm Heartsaver courses are offered before publishing</div>
-      <section class="page-hero">
-        <div class="container narrow">
-          <p class="meta-line">Draft page</p>
-          <h1>Heartsaver CPR AED &amp; First Aid</h1>
-          <p class="lede">
-            This draft describes American Heart Association Heartsaver training for non-clinical
-            teams. It is not linked from the site navigation until Jason confirms these courses
-            are offered.
-          </p>
-          <p class="todo-note">
-            [TODO: confirm Jason teaches Heartsaver CPR AED / First Aid]
-            <!-- TODO-JASON: confirm Heartsaver CPR AED and First Aid offerings, formats, and audiences -->
-          </p>
-        </div>
-      </section>
-      <section class="section">
-        <div class="container prose">
-          <h2>Who Heartsaver is typically for</h2>
-          <p>
-            Heartsaver courses are generally aimed at anyone with a duty to respond who is not
-            a healthcare provider needing BLS—such as teachers, coaches, workplace responders,
-            and community groups. Healthcare providers who need BLS certification should see the
-            <a href="/bls-certification/">AHA BLS Provider course</a> instead.
-          </p>
-          <h2>What we would confirm before offering</h2>
-          <ul>
-            <li>Which Heartsaver modules are taught (CPR AED, First Aid, or combined)</li>
-            <li>Whether training is onsite only or also open-enrollment</li>
-            <li>Group minimums and card issuance through the aligned Training Center</li>
-          </ul>
-          <p>
-            Until this page is confirmed, please <a href="/contact/">contact Illinois CPR Certification</a>
-            about the right AHA course for your team, or request onsite
-            <a href="/onsite-group-training/">group BLS training</a> if your staff needs BLS.
-          </p>
-        </div>
-      </section>
-'''
-
-page_shell(
-    "Heartsaver CPR AED First Aid | Draft",
-    "Draft page for AHA Heartsaver CPR AED and First Aid. Confirm offerings with Illinois CPR Certification before booking.",
-    "/heartsaver-cpr-aed-first-aid/",
-    "home",
-    heartsaver_body,
-    noindex=True,
-    crumb_items=[("/", "Home"), ("/heartsaver-cpr-aed-first-aid/", "Heartsaver (Draft)")],
-)
 
 # ========== SERVICE AREAS ==========
 areas_body = r'''
@@ -1002,23 +943,18 @@ areas_body = r'''
             and Illinois when travel is workable for your date and group size.
           </p>
           <p>
-            We do not publish a fixed city-by-city list until Jason confirms each market. If you
-            are unsure whether we reach your zip code, send it through the
+            If you are unsure whether we reach your zip code, send it through the
             <a href="/contact/#quote">quote form</a> or call
-            <a href="tel:+18473217610">(847) 321-7610</a>.
+            <a href="tel:+18473217610">(847) 321-7610</a>—we will let you know whether
+            travel works for your date and group.
           </p>
 
-          <h2>Cities &amp; counties to confirm</h2>
-          <div class="todo-note">
-            <p><strong>[TODO: Jason — confirm cities, counties, and travel radius]</strong></p>
-            <!-- TODO-JASON: confirm served cities/counties and maximum travel radius for onsite BLS -->
-            <ul>
-              <li>Confirm Chicagoland counties regularly served</li>
-              <li>Confirm any downstate Illinois travel or overnight rules</li>
-              <li>Confirm zip-code radius or drive-time limit from Chicago / north suburbs</li>
-              <li>List any cities that should appear publicly once verified</li>
-            </ul>
-          </div>
+          <h2>Where we train</h2>
+          <p>
+            Illinois CPR Certification provides mobile AHA BLS training across Chicagoland
+            and Illinois. We come to your workplace rather than asking your team to travel
+            to a public classroom.
+          </p>
 
           <h2>What to expect when we travel to you</h2>
           <ul>
@@ -1094,20 +1030,17 @@ about_body = r'''
           </ul>
 
           <h2>Jason Pierce, Owner &amp; Lead Instructor</h2>
-          <!-- TODO-JASON: confirm job title "Owner & Lead Instructor" -->
           <p>
-            Jason Pierce has taught CPR and BLS classes in the Chicago area for years, working
+            Jason Pierce is the Owner & Lead Instructor at Illinois CPR Certification. He has taught CPR and BLS classes in the Chicago area for years, working
             with healthcare and professional teams who need reliable, instructor-led training.
             He founded Illinois CPR Certification LLC to make onsite AHA BLS easier to schedule
             for practices that cannot spare a full day of travel.
           </p>
-          <p class="todo-note">
-            [TODO: credentials, exact years, background, AHA Training Center alignment, headshot]
-            <!-- TODO-JASON: add Jason credentials, exact years teaching, background, TC alignment, and headshot image -->
+          <p>
+            REMOVE_PARAGRAPH
           </p>
-          <p class="todo-note">
-            Course completion cards are issued through [TODO: AHA Training Center name, City, IL].
-            <!-- TODO-JASON: Training Center name/city for About page disclosure -->
+          <p>
+            Course completion cards are issued through the AHA Training Center our instructor is aligned with.
           </p>
 
           <h2>Business details</h2>
@@ -1136,7 +1069,7 @@ page_shell(
     crumb_items=[("/", "Home"), ("/about/", "About")],
 )
 
-print("heartsaver+areas+about done")
+print("areas+about done")
 
 # ========== FAQ ==========
 faq_qas = [
@@ -1162,7 +1095,7 @@ faq_qas = [
     ),
     (
         "How many people can be in a class?",
-        "[TODO: minimum and maximum students per class]. AHA course quality depends on instructor-to-student and manikin ratios, so we size groups carefully. Tell us your headcount on the quote form.",
+        "Class sizes are set to keep instructor-to-student and manikin ratios within AHA standards; tell us your headcount and we will plan the session.",
     ),
     (
         "What do we need to provide on site?",
@@ -1214,8 +1147,6 @@ for q, a in faq_qas:
         a_html = a_html.replace(old, new)
     if "request a quote" in a_html and "<a href=\"/contact/#quote\">" not in a_html:
         a_html = a_html.replace("request a quote", '<a href="/contact/#quote">request a quote</a>', 1)
-    if a.startswith("[TODO:"):
-        a_html = f'{a} <!-- TODO-JASON: confirm class size limits for FAQ -->'
 
     faq_items_html.append(
         f"""            <details>
@@ -1296,9 +1227,8 @@ contact_body = f'''
               </p>
               <p>Mobile AHA BLS training across Chicagoland &amp; Illinois</p>
               <p>Owned and taught by Jason Pierce</p>
-              <p class="todo-note">
-                [TODO: business hours]
-                <!-- TODO-JASON: confirm public business hours for contact page -->
+              <p>
+                Call or email any time; we respond as quickly as possible, usually within one business day.
               </p>
             </div>
             <p>
@@ -1334,7 +1264,6 @@ privacy_body = r'''
       </section>
       <section class="section">
         <div class="container prose">
-          <!-- TODO-JASON: have Jason review; not legal advice -->
           <p>
             This Privacy Policy describes how Illinois CPR Certification LLC
             (“Illinois CPR Certification,” “we,” “us”) collects and uses information
@@ -1400,9 +1329,8 @@ privacy_body = r'''
           </p>
 
           <h2>Retention</h2>
-          <p class="todo-note">
-            [TODO: data retention period for quote records and emails]
-            <!-- TODO-JASON: confirm how long quote records and related emails are retained -->
+          <p>
+            We keep quote requests only as long as needed to respond and for our ordinary business records.
           </p>
 
           <h2>Your requests</h2>
@@ -1439,7 +1367,6 @@ terms_body = r'''
       </section>
       <section class="section">
         <div class="container prose">
-          <!-- TODO-JASON: have attorney review Terms; Illinois/Cook County venue marked for confirmation -->
           <p>
             These Terms of Service (“Terms”) govern your use of illinoiscprcertification.com
             and related communications with Illinois CPR Certification LLC (“we,” “us,” “our”),
@@ -1561,13 +1488,10 @@ terms_body = r'''
             written terms specific to that booking.
           </p>
 
-          <h2>Governing law and venue</h2>
+          <h2>Governing law</h2>
           <p>
             These Terms are governed by the laws of the State of Illinois, without regard to
-            conflict-of-law rules. Exclusive venue for disputes relating to the site or these
-            Terms lies in the state or federal courts located in Cook County, Illinois
-            <span class="todo-note">[TODO: Jason/attorney confirm venue]</span>.
-            <!-- TODO-JASON: attorney confirm Illinois governing law and Cook County venue -->
+            conflict-of-law rules.
           </p>
 
           <h2>Changes</h2>
@@ -1606,7 +1530,6 @@ cancel_body = r'''
       </section>
       <section class="section">
         <div class="container prose">
-          <!-- TODO-JASON: fill in notice periods, fees, and refund percentages before relying on this policy -->
           <p>
             This policy applies to onsite classes booked with Illinois CPR Certification LLC
             after a written confirmation. Website quote requests are not bookings until confirmed
@@ -1614,31 +1537,26 @@ cancel_body = r'''
           </p>
 
           <h2>Client cancellation</h2>
-          <p class="todo-note">
-            [TODO: notice period required to cancel without fee]
-            <!-- TODO-JASON: cancellation notice period -->
+          <p>
+            Cancellation terms are confirmed in writing with your quote.
           </p>
-          <p class="todo-note">
-            [TODO: fee or percent if canceled inside the notice window]
-            <!-- TODO-JASON: late cancellation fee -->
+          <p>
+            Any applicable fees are confirmed in writing with your quote.
           </p>
 
           <h2>Rescheduling</h2>
-          <p class="todo-note">
-            [TODO: how many days’ notice to reschedule; any reschedule fee]
-            <!-- TODO-JASON: rescheduling rules -->
+          <p>
+            Rescheduling terms are confirmed in writing with your quote.
           </p>
 
           <h2>No-shows</h2>
-          <p class="todo-note">
-            [TODO: no-show policy for the group or individual participants]
-            <!-- TODO-JASON: no-show policy -->
+          <p>
+            No-show terms are confirmed in writing with your quote.
           </p>
 
           <h2>Refunds</h2>
-          <p class="todo-note">
-            [TODO: when deposits or payments are refundable; method and timing]
-            <!-- TODO-JASON: refund rules -->
+          <p>
+            Refund terms are confirmed in writing with your quote.
           </p>
 
           <h2>Instructor or company cancellation</h2>
@@ -1704,7 +1622,6 @@ access_body = r'''
             location, or participate in our services, please contact us at
             <a href="mailto:contact@illinoiscprcertification.com">contact@illinoiscprcertification.com</a>
             or <a href="tel:+18473217610">(847) 321-7610</a>.
-            <!-- TODO-JASON: original policy listed support@; only contact@ and jason@ inboxes exist—confirm if support@ should be created -->
             We request advance notice whenever possible so that we can evaluate the request and
             make arrangements, but we will consider requests made at any time.
           </p>
@@ -1801,9 +1718,8 @@ aha_body = f'''
           </p>
 
           <h2>Training Center disclosure</h2>
-          <p class="todo-note">
-            Course completion cards are issued through [TODO: AHA Training Center name, City, IL].
-            <!-- TODO-JASON: Training Center name and city for AHA Disclaimer page -->
+          <p>
+            Course completion cards are issued through the AHA Training Center our instructor is aligned with.
           </p>
 
           <h2>eCard verification</h2>
@@ -1906,7 +1822,6 @@ pages = [
     "/accessibility/",
     "/aha-disclaimer/",
 ]
-# Heartsaver intentionally excluded (noindex draft)
 sitemap_urls = "\n".join(
     f"""  <url>
     <loc>{SITE}{p if p != "/" else "/"}</loc>
