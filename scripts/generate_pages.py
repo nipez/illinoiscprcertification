@@ -68,6 +68,7 @@ def nav(current: str) -> str:
         ("/service-areas/", "Service Areas", "areas"),
         ("/about/", "About", "about"),
         ("/faq/", "FAQ", "faq"),
+        ("/blog/", "Blog", "blog"),
         ("/contact/", "Contact", "contact"),
     ]
     links = []
@@ -130,6 +131,7 @@ def footer() -> str:
             <a href="/onsite-group-training/">Onsite group training</a>
             <a href="/service-areas/">Chicagoland &amp; Illinois</a>
             <a href="/faq/">FAQ</a>
+            <a href="/blog/">Blog</a>
             <a href="/about/">About Jason Pierce</a>
             <a href="/contact/">Request a quote</a>
           </div>
@@ -1815,6 +1817,8 @@ pages = [
     "/service-areas/",
     "/about/",
     "/faq/",
+    "/blog/",
+    "/blog/bls-certification-chicago/",
     "/contact/",
     "/privacy-policy/",
     "/terms/",
