@@ -162,6 +162,17 @@ def footer() -> str:
     <script src="/contact.js" defer></script>"""
 
 
+GA4_TAG = """    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7C7HDF8PQP"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-7C7HDF8PQP');
+    </script>
+"""
+
+
 def head(
     title: str,
     description: str,
@@ -177,7 +188,7 @@ def head(
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+{GA4_TAG}    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content="{description}" />
 {robots}    <link rel="canonical" href="{canonical}" />

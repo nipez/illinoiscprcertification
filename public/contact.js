@@ -43,6 +43,10 @@ if (form) {
     }
     status.textContent = "Thanks — your quote request is in. We will follow up shortly.";
     status.hidden = false;
+
+    if (typeof gtag === "function") {
+      gtag("event", "generate_lead");
+    }
   });
 }
 
