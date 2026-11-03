@@ -1,0 +1,63 @@
+.admin-body {
+  min-height: 100vh;
+  background: #f6f0e6;
+  color: #141c24;
+}
+
+.admin {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 2rem 1.2rem 3rem;
+}
+
+.admin-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.4rem;
+}
+
+.admin h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.login,
+.card-row {
+  background: #fff;
+  padding: 1.1rem 1.15rem;
+  margin-bottom: 0.85rem;
+  border: 1px solid #e3dccf;
+}
+
+.card-row h2 {
+  margin: 0 0 0.35rem;
+  font-size: 1.2rem;
+}
+
+.card-row p {
+  margin: 0.25rem 0;
+  color: #2a3440;
+}
+
+.meta-line {
+  font-size: 0.85rem;
+  color: #5d6670;
+}
+
+.error {
+  color: #b42318;
+}
+
+#logout,
+.login button {
+  display: inline-flex;
+  padding: 0.65rem 0.95rem;
+  border: 0;
+  background: #141c24;
+  color: #f6f0e6;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
